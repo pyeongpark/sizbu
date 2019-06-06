@@ -1,0 +1,161 @@
+        
+        
+        @media screen and (min-width: 768px) {
+
+  
+        }
+
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        select {
+            background-color: #ffffff;
+        }
+
+        form.formenu {
+            padding:10px;
+            border:2px solid #cccccc;
+            border-radius:15px;
+            /*display:none;*/
+
+        }
+
+        div.postinfo {
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-bottom: 5px;
+            margin-top: 2px;
+            padding:10px;
+            border:1px solid #00cc00;
+        }
+
+        div.viewdata {
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-top: 5px;
+            padding:10px;
+            border:1px solid #00cc00;
+        }
+        
+        #btn-purchase:hover{
+            background: #3cb0fd;
+            text-decoration: none;
+        }
+
+        #submit{
+            border-radius: 28px;
+            font-family: Arial;
+            color: #ffffff;
+            font-size: 15px;
+            background: #3498db;
+            padding: 10px 20px 10px 20px;
+            text-decoration: none;
+        }
+
+        #submit:hover{
+            background: #3cb0fd;
+            text-decoration: none;
+        }
+
+
+
+        .login-nav {
+            list-style: none;
+            display: flex; 
+            justify-content: center;
+        }
+
+        .nav-links {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            font-weight:bold;
+            /*margin-left: 15px;*/
+            padding-right: 15px;
+        }
+
+        .nav-links:hover {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .nav-lang {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        .main-nav li {
+            text-align: center;
+            margin: 15px auto;
+        }
+
+        .pp-dialog-purchase {
+            position: absolute;
+            top:20vh;
+        }
+
+        .pp-center {
+            text-align: center;
+        }
+
+        .pp-div-inline {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .pp-span-break {
+            display: inline-block;
+        }
+
+        .pp-border {
+            border: 1px solid #cccccc;
+        }
+
+        .pp-wordwrap {
+            word-wrap:break-word;
+        }
+
+        span.pp-space-abit {
+            padding:15px;
+            display:block;
+        }
+
+        span.texton:hover {
+            color: red;
+            text-decoration: none;
+        }
+
+        .bg-white {
+            background-color: white;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .font-white {
+            color: white;
+        }
+
+        .font-black {
+            color: black;
+        }
+
+        .font-red {
+            color: red;
+        }
+
+        .font-blue {
+            color: blue;
+        }
+
+        .font-darkgreen {
+            color: #006400;
+        }
+
+        .font-darkorange {
+            color: #FF8C00
+        }
+        

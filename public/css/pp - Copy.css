@@ -1,0 +1,165 @@
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        .login-nav {
+            display: flex;
+            margin-right: 20px;
+            flex-direction: row;
+            justify-content: flex-end;
+            list-style: none;
+        }
+
+        /*
+        .login-nav li {
+            margin: 0;
+        }
+        */
+
+        .nav-links {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            font-weight:bold;
+            margin-left: 20px;
+        }
+
+        .nav-links:hover {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .nav-lang {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        .main-nav li {
+            text-align: center;
+            margin: 15px auto;
+        }
+
+        .logo-img {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+        }
+
+        .logo-help {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            vertical-align: top;
+        }
+
+        .navbar-toggle {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 24px;
+        }
+
+        .rcorner-center {
+            width: 43vw;
+        }
+
+
+        /********* End of Modal *************/
+
+
+        .active {
+            display: block;
+        }
+
+        .pp-center {
+            text-align: center;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .font-red {
+            color: red;
+        }
+
+        .font-blue {
+            color: blue;
+        }
+
+        .font-darkgreen {
+            color: #006400;
+        }
+
+        .font-darkorange {
+            color: #FF8C00
+        }
+
+        .sm-text {
+            font-size:16px;
+        }
+
+        .md-text {
+            font-size:18px;
+        }
+
+        .lg-text {
+            font-size:20px;
+        }
+
+
+        /* this should be placed at the end why??*/
+
+        
+        @media screen and (min-width: 768px) {
+
+            /*
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 0;
+                height: 120px;
+                align-items: center;
+            }
+            
+
+            
+            .login-nav {
+                display: flex;
+                margin-right: 20px;
+                flex-direction: row;
+                justify-content: flex-end;
+                list-style: none;
+            }
+
+            .login-nav li {
+                margin: 0;
+            }
+
+            .nav-links {
+                margin-left: 20px;
+            }
+
+            .navbar-toggle {
+                display: none;
+            }
+
+            .logo-img:hover {
+                cursor: crosshair;
+            }
+
+            .nav-links:hover {
+                color: rgba(255, 255, 255, 1);
+            }
+
+            */
+            
+        }
+        

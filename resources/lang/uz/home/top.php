@@ -5,9 +5,10 @@ return [
     /*
         strings for general uses
     */
-    'invest' => 'Investitsiyalar, Fondni jalb qilish yoki Markaziy Osiyodagi hamkorlar',
-    'ca' => 'Markaziy Osiyoda',
-    'en' =>'Ingliz',
-    'ru' =>'Rus',
-    'uz' =>'Uzbek',
+     'title' => 'Markaziy Osiyoga investitsiyalar',
+    'location1' => 'Markaziy Osiyo',
+    'invest1' => 'Investitsiyalar',
+    'invest2' => 'Fondi, hamkorlar',
+    'login' => 'Kirish',
+    'register' => 'Register',
     ]; 

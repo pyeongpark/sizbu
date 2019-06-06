@@ -1,0 +1,144 @@
+	
+
+    .ppnav-top {
+        font-size: 18px;
+        background-image: linear-gradient(270deg, #494645 0%, #ffffff 100%);
+        border-top: 1px solid #cccccc;
+        padding: 2px;
+        height: 100px;
+          /* to display vertically centered, not needed for desktop */
+        display: flex;         
+        align-items: center;    
+    }
+
+    .navbar-bottom {
+        font-size: 18px;
+        background-image: linear-gradient(180deg, #494645 0%, #ffffff 100%);
+        border-top: 1px solid #cccccc;
+        padding-top: 5px;
+        height:90px;
+    }
+
+    #top-left {
+        width: 25vw;
+    }
+
+    #top-right {
+        width: 25vw;
+        /*vertical-align: bottom;*/
+    }
+
+    .logo-img {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+    }
+
+    .logo-help {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        vertical-align: top;
+    }
+
+
+    .height-mid {
+        min-height:calc(100vh - 190px);
+    }
+
+    .rcorner {
+        border-radius: 10px;
+        background: #d3d3d3;
+        padding: 5px;
+        width: 45vw;
+        height: 70px; 
+    }
+
+    .m-menu {
+        width: 100vw;
+        background-color: #535252;
+        height: 30px;
+        font-weight: bold;
+        display: flex;    
+        justify-content: center;   /* horizontal */   
+        align-items: center;       /* vertical */
+    }
+
+    .a-menu {
+        color: white;
+    }
+
+    a.a-menu:hover {
+        color: #cccccc;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    input[type="text"] {
+        padding-left: 5px;
+        border: 1px solid #cccccc;
+    }
+
+    img.btn-sort {
+        height: 31px;
+        width: 31px;
+    }
+
+    img.btn-sort:hover {
+        color: #cccccc;
+        cursor: pointer;
+    }
+    /*
+    img.btn-sort .tooltiptext {
+        visibility: hidden;
+        width: 100px;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        
+        position: absolute;
+        z-index: 1;
+    }
+
+    img.btn-sort:hover .tooltiptext {
+        visibility: visible;
+    }
+    */
+
+    img.btn-search {
+        height: 20px;
+        width: 20px;
+    }
+
+    ul.pp-dialog {
+        list-style: none;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    li.pointme:hover {
+        cursor: pointer;
+        color: blue;
+    }
+
+    .btn-delete:hover {
+        cursor: pointer;
+    }
+
+    .font-sbold {
+        font-weight: bold;
+        font-size: 13px;
+    }
+
+    .sm-vtext {
+        font-size: 13px;
+    }
+
+    .md-vtext {
+        font-size: 15px;
+    }
+
+    .lg-vtext {
+        font-size: 18px;
+    }

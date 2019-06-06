@@ -1,0 +1,128 @@
+ html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+
+    height: 100vh;
+    /*margin: 1px;
+     max-width: 900px;*/
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.pp-center {
+    text-align: center;
+}
+
+.pp-padding-lr0 {
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+}
+
+
+.full-height {
+    height: 100vh;
+}   
+
+.height-80 {
+    height: 80vh;
+}
+
+.height-78 {
+    height: 78vh;
+}
+
+.height-75 {
+    height: 75vh;
+}
+
+.height-15 {
+    height: 15vh;
+}
+
+.height-11 {
+    height: 11vh;
+}
+
+.height-10 {
+    height: 10vh;
+}
+
+.vsm-text {
+    font-size:9px;
+}
+
+.sm-text {
+    font-size:10px;
+}
+
+.md-text {
+    font-size:11px;
+}
+
+.lg-text {
+    font-size:12px;
+}
+
+.vsm-desk-text {
+    font-size:10px;
+}
+
+.sm-desk-text {
+    font-size:11px;
+}
+
+.md-desk-text {
+    font-size:12px;
+}
+
+.lg-desk-text {
+    font-size:14px;
+}
+
+.font-black {
+    color: black;
+}
+
+.font-red {
+    color: red;
+}
+
+.font-blue {
+    color: blue;
+}
+
+.font-darkgreen {
+    color: #006400;
+}
+
+.font-darkorange {
+    color: #FF8C00
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.dis-block {
+    clear: both;
+    display: block;
+}
+
+.dis-inblock {
+    display: inline-block;
+}
+
+.bgcolor-white {
+    background-color: white;
+}
+
+.bgcolor-gray {
+    background-color: #898383;
+}
