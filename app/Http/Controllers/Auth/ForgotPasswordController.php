@@ -29,4 +29,15 @@ class ForgotPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    /* pp added 
+        run 'php artisan route:list' to see routes
+    */
+
+    /*
+    public function showLinkRequestForm() {
+        //return view('auth/passwords/reset');
+        return view('auth/passwords/email');
+    }
+    */
 }
