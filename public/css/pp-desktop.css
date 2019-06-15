@@ -23,6 +23,11 @@
         width: 25vw;
     }
 
+     #top-middle {
+        width: 50vw;
+        /*vertical-align: bottom;*/
+    }
+
     #top-right {
         width: 25vw;
         /*vertical-align: bottom;*/
@@ -50,7 +55,7 @@
         border-radius: 10px;
         background: #d3d3d3;
         padding: 5px;
-        width: 45vw;
+        /*width: 45vw;*/
         height: 70px; 
     }
 
@@ -88,6 +93,7 @@
         color: #cccccc;
         cursor: pointer;
     }
+
     /*
     img.btn-sort .tooltiptext {
         visibility: hidden;
@@ -111,6 +117,12 @@
         width: 20px;
     }
 
+    img.btn-back {
+        height: 35px;
+        width: 35px;
+        cursor: pointer;
+    }
+
     ul.pp-dialog {
         list-style: none;
         text-decoration: none;
@@ -123,6 +135,16 @@
     }
 
     .btn-delete:hover {
+        cursor: pointer;
+    }
+
+    img.btn-edit {
+        height: 25px;
+        width: 25px;
+        vertical-align: text-bottom;
+    }
+
+    .btn-edit:hover {
         cursor: pointer;
     }
 

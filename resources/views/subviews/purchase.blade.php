@@ -16,7 +16,7 @@
 <!-- https://medium.com/justlaravel/search-functionality-in-laravel-a2527282150b -->
 
 <div class="p-3 postinfo" >
-	<span class="vlg-vtext" style="display:block">Post what you want to purchase or sell.</span>
+	<span class="vlg-vtext" style="display:block">Post what you want to buy or sell.</span>
 	@guest
 		<span class="md-vtext font-bold" style="display:block">Please Login to post.</span>
 		<!--button type="button" disabled><span class="md-vtext">Post</span></button-->
@@ -32,13 +32,13 @@
 	<img src="img/sort.png" class="btn-sort" title="sort data"
 											data-toggle="modal" data-target="#sortModal">
 	<!-- SEARCH HELP -->
-	<form action="/search" method="POST" class="d-inline">
+	<form action="/searchpurchase" method="POST" class="d-inline">
 	    {{ csrf_field() }}
 	    <div class="float-right">
 	    	@desktop
-				<input type="text" name="search" size="35" placeholder="search a product"> 
+				<input type="text" name="search" size="35" placeholder=""> 
 			@elsedesktop
-				<input type="text" name="search" size="25" placeholder="search a product">
+				<input type="text" name="search" size="20" placeholder="">
 			@enddesktop
 			<button type="submit">
 				<img src="img/search.jpg" class="btn-search">
@@ -59,7 +59,7 @@
                 	<ul class="pp-dialog">
                 		<li onclick="sort('created_at')" class="pointme">Date (older earlier)</li>
                 		<li onclick="sort('product')" class="pointme">Product</li>
-                		<li onclick="sort('phonecode')" class="pointme">Country</li>
+                		<li onclick="sort('phonecode')" class="pointme">Country(by country calling code)</li>
                 		<li onclick="sort('buysell')" class="pointme">Buy or Sell</li>
                 	</ul>
                 </div>
@@ -91,15 +91,25 @@
 			<div class="pb-5 pt-2">
 				<span class="font-sbold">Number:&nbsp;</span>
 				<span class='pr-5'>{{$purchase->id}}</span>
-
-				@if ($showDel)
-					<img src="img/delete.png" class="float-right btn-delete" title="delete it">
-				@endif
-
 				<span class="font-sbold">Date:&nbsp;</span>
-					<?php echo substr($purchase->created_at,0,10) ?><br>
+					<?php echo substr($purchase->created_at,0,10) ?>
+				@if ($showDel)
+					<img src="img/pencil.png" onclick="editme( {{ $purchase->id }} )" 
+						class="float-right btn-edit" title="edit it">
+				@endif
+				<br>
+
 				<span class="font-sbold">Name:&nbsp;</span>
-					{{$purchase->firstname}}&nbsp;{{$purchase->lastname}}<br>
+					{{$purchase->firstname}}&nbsp;{{$purchase->lastname}}
+				<br>
+
+				<span class="font-sbold">Country:&nbsp;</span>
+					<?php echo substr($purchase->country, 0, 30) ?>
+				@if ($showDel)
+					<img src="img/delete.png" onclick="deleteme( {{ $purchase->id }} )" 
+						class="float-right btn-delete" title="delete it">
+				@endif
+				<br>
 
 				@if (($purchase->contactme)== 1)
 					<span class="font-sbold">Phone:&nbsp;</span>
@@ -120,11 +130,14 @@
 		@endforeach
 
 	</div>
+
+	<?php echo $purchases->render(); ?>
+
 </div>
 
 
 <script>
-	
+
 	$(document).ready(function(){
     	$("#btn-purchase").click(function(){
         	//$("#form-purchase").toggle();
@@ -132,10 +145,20 @@
     	});
 	});
 
-	function sort(by){
+	function sort(by) {
 		window.location.href = "/purchasesort/" + by;
 	}
+
+	function deleteme(id) {
+		var cfm = confirm("Remove this posting?");
+		
+		if (cfm)
+			window.location.href = "/purchasedelete/" + id;
+	}
 	
+	function editme(id) {
+		window.location.href = "/purchaseedit/" + id;
+	}
 </script>
 
 

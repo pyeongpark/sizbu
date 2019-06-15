@@ -1,6 +1,7 @@
 
     <nav class="ppnav-top">
-        <div id="top-left">
+    
+        <div class="pp-div-inline" id="top-left">
             <a href="/" ><img class="logo-img" src="{{$path}}img/logo.png"></a>
 
             @desktop 
@@ -50,7 +51,7 @@
             </div>
         </div>
 
-        <div id="top-middle">
+        <div class="pp-div-inline">
             @desktop 
                 <div class="rcorner pp-center">
         	        <span class="font-red md-vtext">@lang('general.continent')</span><br>
@@ -67,17 +68,16 @@
             @enddesktop
 	    </div>
         
-        <div id="top-right">
-            <ul class="d-flex flex-row-reverse  pp-no-dot pt-1">
+        <div id="top-right" style="border:1px solid red">
+            <ul class="login-nav float-right">
                 @guest
-                    <li><a class="nav-links sm-vtext" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                     @desktop
                         <li><a class="nav-links sm-vtext" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                     @elsedesktop
                         <li><a class="nav-links sm-vtext" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                     @enddesktop
-                    
+                    <li><a class="nav-links sm-vtext" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                 @else
                     <li>
                         <span class="sm-vtext" style="color: white">
@@ -93,13 +93,9 @@
                         </form>
                     </li>
                 @endguest
-            </ul>
-
-            @desktop
-                <a href="/"><img src="img/home.png" width="50px" height="35px" class="float-right pr-3"></a>
-            @elsedesktop
-                <a href="/"><img src="img/home.png" width="65px" height="45px" class="float-right pr-3"></a>
-            @enddesktop
+            </ul><br>
+            <a href="/"><img src="img/home.png" width="35px" height="35px" class="float-right"></a>
         </div>
 
+        
     </nav>

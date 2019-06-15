@@ -94,6 +94,12 @@ return [
 
     'locale' => 'en',
 
+    /*PP
+        number of records displayed in a page
+    */
+
+    'pagination' => 4,
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

@@ -9,6 +9,6 @@ class Purchase extends Model
     //	if table for the model is not "purchases" (plural of class name)
     //  protected $table = 'my_purchases';
 
-    protected $fillable = ['loginname', 'firstname', 'lastname', 'phonecode', 'phonenumber', 'email', 
+    protected $fillable = ['loginname', 'firstname', 'lastname', 'country', 'phonecode', 'phonenumber', 'email', 
     						'contactme', 'buysell', 'product', 'description', 'created_at'];
 }

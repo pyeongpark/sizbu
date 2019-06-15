@@ -1,4 +1,4 @@
-        
+/        
         
         @media screen and (min-width: 768px) {
 
@@ -59,15 +59,7 @@
             background: #3cb0fd;
             text-decoration: none;
         }
-
-
-
-        .login-nav {
-            list-style: none;
-            display: flex; 
-            justify-content: center;
-        }
-
+        
         .nav-links {
             text-decoration: none;
             color: rgba(255, 255, 255, 0.7);
@@ -91,6 +83,10 @@
             margin: 15px auto;
         }
 
+        .pp-no-dot {
+            list-style: none;
+        }
+
         .pp-dialog-purchase {
             position: absolute;
             top:20vh;
@@ -98,11 +94,6 @@
 
         .pp-center {
             text-align: center;
-        }
-
-        .pp-div-inline {
-            display: inline-block;
-            vertical-align: middle;
         }
 
         .pp-span-break {

@@ -43,14 +43,34 @@ Route::get('/addpurchase', function () {
     return view('subviews/addpurchase');
 });
 
+Route::get('/editpurchase', function () {
+    return view('subviews/editpurchase');
+});
+
+Route::get('/editpurchase', function () {
+    return view('subviews/editpurchase');
+});
+
+Route::get('/searchedpurchase', function () {
+    return view('subviews/searchedpurchase');
+});
+
 Route::resource('purchases', 'PurchaseController');
 
 Route::get('/postpurchase', 'PurchaseController@store');
+
+Route::get('/post_editedpurchase', 'PurchaseController@update');
+
+Route::post('/searchpurchase', 'PurchaseController@search');
 
 /* view purchase should route this ...*/
 Route::get('/purchase', 'PurchaseController@index')->name('purchase');
 
 Route::get('/purchasesort/{sortby}', 'PurchaseController@sort');
+
+Route::get('/purchasedelete/{id}', 'PurchaseController@delete');
+
+Route::get('/purchaseedit/{id}', 'PurchaseController@edit');
 
 /*
 	$routeMiddleware in kernel.php should have 'localization'defined

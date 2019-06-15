@@ -46,8 +46,6 @@
 
     /* for vertically aligned, display and align-tems needed */
     .rcorner {
-        /*border-radius: 10px;
-        background: #d3d3d3;*/
         padding: 5px;
         height: 120px; 
         width: 35vw;
@@ -72,7 +70,7 @@
 
     input[type="text"] {
         padding-left: 10px;
-        border: 1px solid #cccccc;
+        border: 1px solid #6B5D5D;
         font-size: 4vw;
     }
 
@@ -107,6 +105,12 @@
         vertical-align: text-bottom;
     }
 
+    img.btn-edit {
+        height: 45px;
+        width: 45px;
+        vertical-align: text-bottom;
+    }
+
     ul.pp-dialog {
         list-style: none;
         text-decoration: none;
@@ -124,21 +128,21 @@
     }
 
     .sm-vtext {
-        font-size: 2.5vw;
+        font-size: 2.7vw;
     }
 
     .md-vtext {
-        font-size: 3.0vw;
+        font-size: 3.2vw;
     }
 
     .lg-vtext {
-        font-size: 3.5vw;
+        font-size: 3.7vw;
     }
 
     .vlg-vtext {
-        font-size: 4.0vw;
+        font-size: 4.2vw;
     }
 
     #email, #password, #name, #password-confirm {
-    	font-size: 3.5vw;
+    	font-size: 3.7vw;
     }

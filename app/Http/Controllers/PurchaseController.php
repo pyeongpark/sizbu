@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Purchase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 
 class PurchaseController extends Controller
 {
@@ -17,9 +18,11 @@ class PurchaseController extends Controller
      */
     public function index()
     {
+        //$all_purchase = DB::select('select * from purchases order by created_at DESC');
 
-        //$all_purchase = Purchase::all();
-        $all_purchase = DB::select('select * from purchases order by created_at DESC');
+        $numInPage = Config::get('app.pagination');
+
+        $all_purchase = DB::table('purchases')->orderBy('id', 'DESC')->paginate($numInPage);
 
         return view('subviews/purchase')->with('purchases', $all_purchase);
     }
@@ -45,6 +48,7 @@ class PurchaseController extends Controller
         $validatedData = $request->validate([
             'firstname' => 'bail|required|max:30',
             'lastname' => 'bail|required|max:30',
+            'country' => 'bail|required',
             'phonecode' => 'bail|required|max:5|regex:/^[0-9]+$/',
             'phonenumber' => 'bail|required|max:20',
             'email' => 'bail|required|email|max:50',
@@ -60,6 +64,7 @@ class PurchaseController extends Controller
         $purchase->loginname = Auth::user()->name;
         $purchase->firstname = $request['firstname'];
         $purchase->lastname = $request['lastname'];
+        $purchase->country = $request['country'];
         $purchase->phonecode = $request['phonecode'];
         $purchase->phonenumber = $request['phonenumber'];
         $purchase->email = $request['email'];
@@ -82,10 +87,10 @@ class PurchaseController extends Controller
     /* PP : added for sorting the records */
     public function sort($sortby)
     {
-        //if ($sortby === "created_at")
-            //$sorted_purchase = DB::select('select * from purchases order by '.$sortby.' DESC');
-        //else
-            $sorted_purchase = DB::select('select * from purchases order by '.$sortby.' ASC');
+        $numInPage = Config::get('app.pagination');
+
+        //$sorted_purchase = DB::select('select * from purchases order by '.$sortby.' ASC');
+        $sorted_purchase = Purchase::orderBy($sortby)->paginate($numInPage);
 
         return redirect('/purchase')->with('sortedpurchases', $sorted_purchase);
     }
@@ -101,6 +106,20 @@ class PurchaseController extends Controller
         //
     }
 
+    public function search(Request $request)
+    {
+        $q = $request['search'];
+
+        //$searched = Purchases::where('description','LIKE','%'.$q.'%')->orWhere('email','LIKE','%'.$q.'%')//->orWhere('lastname','LIKE','%'.$q.'%')->get();
+
+        $searched = DB::select("select * from purchases where description like '%{$q}%' or lastname like '%{$q}%' or firstname like '%{$q}%' order by created_at DESC");
+
+        // flash session
+        return redirect('/searchedpurchase')->with('search-result', $searched);
+
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -109,19 +128,66 @@ class PurchaseController extends Controller
      */
     public function edit($id)
     {
-        //
+        session_start();
+
+        $edit_purchase = DB::select('select * from purchases where id = ' . $id);
+
+        $_SESSION['editPurchase'] = $edit_purchase;
+        $_SESSION['editIdPurchase'] = $id;
+
+        return redirect('/editpurchase');
+    }
+
+    public function delete($id)
+    {
+        $delete_purchase = DB::select('delete from purchases where id= '. $id);
+
+        return redirect('/purchase');
     }
 
     /**
      * Update the specified resource in storage.
+
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    //public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'firstname' => 'bail|required|max:30',
+            'lastname' => 'bail|required|max:30',
+            'country' => 'bail|required',
+            'phonecode' => 'bail|required|max:5|regex:/^[0-9]+$/',
+            'phonenumber' => 'bail|required|max:20',
+            'email' => 'bail|required|email|max:50',
+            'product' => 'required|nullable',
+            'description' => 'required|min:100',
+        ]);
+
+        $today = date('Y-m-d H:i:s');
+        $id = $request['id'];
+
+        $fname = $request['firstname'];
+        $lname = $request['lastname'];
+        $country = $request['country'];
+        $pc = $request['phonecode'];
+        $pn = $request['phonenumber'];
+        $email = $request['email'];
+        $cm = $request['contactme'];
+        $bs = $request['buysell'];
+        $product = $request['product'];
+        $des = $request['description'];
+        $up_at = $today;
+
+        DB::select("update purchases set firstname = '$fname', lastname = '$lname', country='$country', phonecode = '$pc', phonenumber = '$pn', email = '$email', contactme = $cm, buysell = '$bs', product = '$product', description = '$des', updated_at = '$up_at' where id=".$id);
+
+        /* passed current url back2url in the form */
+        $b2u = $request->input('back2url'); 
+
+        return redirect($b2u);
     }
 
     /**
