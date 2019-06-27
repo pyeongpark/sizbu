@@ -9,32 +9,32 @@
 
 	$curUrl = $_SESSION['currentUrl'];
 
-	$editId = $_SESSION['editIdPurchase'];
+	$editId = $_SESSION['editIdFund'];
 
-	$editPurchase = $_SESSION['editPurchase'];
-	$ep = $editPurchase[0];
+	$editFund = $_SESSION['editFund'];
+	$ep = $editFund[0];
 ?>
 	
 <div class="p-3 lg-vtext">
 	<span class="md-vtext font-red" style="padding-left:20px">
-		* @lang('purchase.ep').
+		* @lang('fund.ep').
 	</span>
-	<form id="form-purchase" class="formenu" action="/post_editedpurchase" method="GET">
+	<form id="form-fund" class="formenu" action="/post_editedfund" method="GET">
 		@csrf
 		
 		<input type="hidden" name="back2url" value={{$curUrl}}>
 		<input type="hidden" name="id" value={{$editId}}>
 
-		<a href=" {{ route('purchase') }}"><span class="float-right font-blue texton">@lang('purchase.close')</span></a>
+		<a href=" {{ route('fund') }}"><span class="float-right font-blue texton">@lang('fund.close')</span></a>
 		
-  		<label class="col-sm-3 control-label font-bold">@lang('purchase.fn'):</label>
+  		<label class="col-sm-3 control-label font-bold">@lang('fund.fn'):</label>
   		&nbsp;<input type="text" name="firstname" value="{{ $ep->firstname }}"
   		@error('firstname') is-invalid @enderror>
   		@error('firstname')
 		    <div class="alert alert-danger">{{ $message }}</div>
 		@enderror
     	<br>
-  		<label class="col-sm-3 control-label font-bold">@lang('purchase.ln'):</label>
+  		<label class="col-sm-3 control-label font-bold">@lang('fund.ln'):</label>
   		&nbsp;<input type="text" name="lastname" value="{{ $ep->lastname }}"
   		@error('lastname') is-invalid @enderror>
   		@error('lastname')
@@ -42,7 +42,7 @@
 		@enderror
   		<br>
 
-    	<label class="col-sm-3 control-label font-bold pt-1">@lang('purchase.ctry'):</label>&nbsp;
+    	<label class="col-sm-3 control-label font-bold">@lang('fund.ctry'):</label>&nbsp;
 		<input list="subnation" name="country" @error('country') is-invalid @enderror>
 		<datalist id="subnation">
 			@lang('longview.ca-nations')
@@ -52,60 +52,53 @@
 		@enderror
 		<br>
 
-    	<label class="col-sm-5 control-label font-bold">@lang('purchase.pcc'):</label>
+    	<label class="col-sm-5 control-label font-bold">@lang('fund.pcc'):</label>
   		&nbsp;<input type="text" name="phonecode" size="2" value="{{ $ep->phonecode }}"
   		@error('phonecode') is-invalid @enderror><span class="sm-vtext">&nbsp;(digits only)</span>
   		@error('phonecode')
 		    <div class="alert alert-danger">{{ $message }}</div>
 		@enderror
     	<br>
-    	<label class="col-sm-5 control-label font-bold">@lang('purchase.pn'):</label>
+    	<label class="col-sm-5 control-label font-bold">@lang('fund.pn'):</label>
   		&nbsp;<input type="text" name="phonenumber" size="10" value="{{ $ep->phonenumber }}"
   		@error('phonenumber') is-invalid @enderror>
   		@error('phonenumber')
 		    <div class="alert alert-danger">{{ $message }}</div>
 		@enderror
     	<br>
-    	<label class="col-sm-5 control-label font-bold">@lang('purchase.email'):</label>
+    	<label class="col-sm-5 control-label font-bold">@lang('fund.email'):</label>
   		&nbsp;<input type="text" name="email" value="{{$ep->email}}"
   		@error('email') is-invalid @enderror>
   		@error('email')
 		    <div class="alert alert-danger">{{ $message }}</div>
 		@enderror
     	<br>
-    	<label class="col-sm-8 control-label font-bold">@lang('purchase.cy')</label>
+    	<label class="col-sm-8 control-label font-bold">@lang('fund.cy')?</label>
     	<div class="radio">
     		@if ($ep->contactme)
 			  	<label class="col-sm-2"><input type="radio" name="contactme" value="1" checked>
 			  		<span class="pl-2">Yes</span></label>
 			  	<label class="col-sm-7"><input type="radio" name="contactme" value="0">
-			  		<span class="pl-2">@lang('purchase.ot')&nbsp;@lang('general.company-short')</span></label>
+			  		<span class="pl-2">@lang('fund.ot')&nbsp;@lang('general.company-short')</span></label>
 			@else
 				<label class="col-sm-2"><input type="radio" name="contactme" value="1">
 			  		<span class="pl-2">Yes</span></label>
 			  	<label class="col-sm-7"><input type="radio" name="contactme" value="0" checked>
-			  		<span class="pl-2">@lang('purchase.ot')&nbsp;@lang('general.company-short')</span></label>
+			  		<span class="pl-2">@lang('fund.ot')&nbsp;@lang('general.company-short')</span></label>
 			@endif
 		</div>
 		<span class="pp-space-abit"></span>
 
-    	<label class="col-sm-8 control-label font-bold">@lang('purchase.bs')?</label>
-    	<div class="radio">
-    		@if ($ep->buysell === 'buy')
-			  	<label class="col-sm-4"><input type="radio" name="buysell" value="buy" checked>
-			  		<span class="pl-2">@lang('purchase.tb')&nbsp;</span></label>
-			  	<label class="col-sm-4"><input type="radio" name="buysell" value="sell">
-			  		<span class="pl-2">@lang('purchase.ts')&nbsp;</span></label>
-			@else
-				<label class="col-sm-4"><input type="radio" name="buysell" value="buy">
-			  		<span class="pl-2">@lang('purchase.tb')&nbsp;</span></label>
-			  	<label class="col-sm-4"><input type="radio" name="buysell" value="sell" checked>
-			  		<span class="pl-2">@lang('purchase.ts')</span></label>
-			@endif
-		</div>
+    	<label class="col-sm-4 control-label font-bold">@lang('fund.fa'):</label>
+    	&nbsp;<input type="text" name="amount" value="{{ $ep->amount }}"
+  		@error('amount') is-invalid @enderror>
+  		@error('amount')
+		    <div class="alert alert-danger">{{ $message }}</div>
+		@enderror
+  		<br>
 		<span class="pp-space-abit"></span>
 
-  		<label class="col-sm-4 control-label font-bold">@lang('purchase.wp'):</label>
+  		<label class="col-sm-4 control-label font-bold">@lang('fund.fw'):</label>
   		<select name="product" @error('product') is-invalid @enderror>
   			<optgroup  class="select-fontsize">
 				@lang('longview.ca_product')
@@ -116,7 +109,7 @@
 		@enderror
     	<span class="pp-space-abit"></span>
   		<label class="col-sm-10 control-label font-bold">
-  			@lang('purchase.des'):</label>
+  			@lang('fund.tu'):</label>
     	<br>
     	@error('description')
 		    <div class="alert alert-danger">{{ $message }}</div>

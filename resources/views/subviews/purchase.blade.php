@@ -16,12 +16,20 @@
 <!-- https://medium.com/justlaravel/search-functionality-in-laravel-a2527282150b -->
 
 <div class="p-3 postinfo" >
-	<span class="vlg-vtext" style="display:block">Post what you want to buy or sell.</span>
+	@desktop
+		<img src="img/seeit.png" height="18px">
+	@elsedesktop
+		<span class="vlg-vtext font-bold font-red">&#8224;&nbsp;</span>
+	@enddesktop
+	<span class="vlg-vtext">@lang('purchase.postit')</span>
+
 	@guest
-		<span class="md-vtext font-bold" style="display:block">Please Login to post.</span>
+		<span class="md-vtext font-bold pt-1" style="display:block">@lang('purchase.loginplease')</span>
 		<!--button type="button" disabled><span class="md-vtext">Post</span></button-->
 	@else
-		<button type="button" class="btn-primary" id="btn-purchase"><span class="md-vtext">POST</span></button>
+		<button type="button" class="btn-primary pt-1" id="btn-purchase" style="display:block">
+			<span class="md-vtext">@lang('purchase.postbtn')</span>
+		</button>
 		<?php
 			$loggedBy = Auth::user()->name;
 		?>
@@ -32,7 +40,7 @@
 	<img src="img/sort.png" class="btn-sort" title="sort data"
 											data-toggle="modal" data-target="#sortModal">
 	<!-- SEARCH HELP -->
-	<form action="/searchpurchase" method="POST" class="d-inline">
+	<form action="/searchpurchase" method="GET" name="form1" class="d-inline" onsubmit="return required();">
 	    {{ csrf_field() }}
 	    <div class="float-right">
 	    	@desktop
@@ -50,17 +58,17 @@
 		<div class="modal-dialog pp-dialog-purchase">
             <div class="modal-content">
                 <div class="modal-header">
-                	<span class="vlg-vtext">Sort by:</span>
+                	<span class="vlg-vtext">@lang('purchase.sortby'):</span>
                     <button type="button" class="close" data-dismiss="modal">
                     	<span class="lg-vtext" font-bold>&#88;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                 	<ul class="pp-dialog">
-                		<li onclick="sort('created_at')" class="pointme">Date (older earlier)</li>
-                		<li onclick="sort('product')" class="pointme">Product</li>
-                		<li onclick="sort('phonecode')" class="pointme">Country(by country calling code)</li>
-                		<li onclick="sort('buysell')" class="pointme">Buy or Sell</li>
+                		<li onclick="sort('created_at')" class="pointme">@lang('purchase.sortdate')</li>
+                		<li onclick="sort('product')" class="pointme">@lang('purchase.sortproduct')</li>
+                		<li onclick="sort('phonecode')" class="pointme">@lang('purchase.sortcountry')</li>
+                		<li onclick="sort('buysell')" class="pointme">@lang('purchase.sortbuysell')</li>
                 	</ul>
                 </div>
             </div>
@@ -89,9 +97,9 @@
 			?>
 
 			<div class="pb-5 pt-2">
-				<span class="font-sbold">Number:&nbsp;</span>
-				<span class='pr-5'>{{$purchase->id}}</span>
-				<span class="font-sbold">Date:&nbsp;</span>
+				<span class="font-mbold font-darkorange underlined">@lang('purchase.num'):&nbsp;</span>
+				<span class='pr-5 font-darkorange'>{{$purchase->id}}</span>
+				<span class="font-sbold">@lang('purchase.dt'):&nbsp;</span>
 					<?php echo substr($purchase->created_at,0,10) ?>
 				@if ($showDel)
 					<img src="img/pencil.png" onclick="editme( {{ $purchase->id }} )" 
@@ -99,11 +107,11 @@
 				@endif
 				<br>
 
-				<span class="font-sbold">Name:&nbsp;</span>
+				<span class="font-sbold">@lang('purchase.nm'):&nbsp;</span>
 					{{$purchase->firstname}}&nbsp;{{$purchase->lastname}}
 				<br>
 
-				<span class="font-sbold">Country:&nbsp;</span>
+				<span class="font-sbold">@lang('purchase.ctry'):&nbsp;</span>
 					<?php echo substr($purchase->country, 0, 30) ?>
 				@if ($showDel)
 					<img src="img/delete.png" onclick="deleteme( {{ $purchase->id }} )" 
@@ -112,19 +120,19 @@
 				<br>
 
 				@if (($purchase->contactme)== 1)
-					<span class="font-sbold">Phone:&nbsp;</span>
-						country code:&nbsp;{{$purchase->phonecode}},&nbsp;&nbsp;
-						number:&nbsp;{{$purchase->phonenumber}}<br>
-					<span class="font-sbold">E-mail:&nbsp;</span>{{$purchase->email}}<br>
+					<span class="font-sbold">@lang('purchase.phone'):&nbsp;</span>
+						@lang('purchase.cc'):&nbsp;{{$purchase->phonecode}},&nbsp;&nbsp;
+						@lang('purchase.snm'):&nbsp;{{$purchase->phonenumber}}<br>
+					<span class="font-sbold">@lang('purchase.email'):&nbsp;</span>{{$purchase->email}}<br>
 				@else
-					<span class="font-sbold">Phone:&nbsp;</span>Contact me through @lang('general.company-short')<br>
-					<span class="font-sbold">E-mail:&nbsp;</span>Contact me through @lang('general.company-short')<br>
+					<span class="font-sbold">@lang('purchase.phone'):&nbsp;</span>@lang('purchase.contactme') @lang('general.company-short')<br>
+					<span class="font-sbold">@lang('purchase.email'):&nbsp;</span>@lang('purchase.contactme') @lang('general.company-short')<br>
 				@endif
 
-				<span class="font-sbold">Buy or Sell:&nbsp;</span>{{strtoupper($purchase->buysell)}}<br>
+				<span class="font-sbold">@lang('purchase.bs'):&nbsp;</span>{{strtoupper($purchase->buysell)}}<br>
 
-				<span class="font-sbold">Product category:&nbsp;</span>{{$purchase->product}}<br>
-				<span class="font-sbold">Description:&nbsp;</span>
+				<span class="font-sbold">@lang('purchase.pc'):&nbsp;</span>{{$purchase->product}}<br>
+				<span class="font-sbold">@lang('purchase.des'):&nbsp;</span>
 				<span class="pp-wordwrap">{{$purchase->description}}</span>
 			</div>
 		@endforeach
@@ -159,6 +167,16 @@
 	function editme(id) {
 		window.location.href = "/purchaseedit/" + id;
 	}
+
+	function required() {
+		var empt = document.forms["form1"]["search"].value;
+		
+		if (empt.length < 2)
+			return false;
+		else
+			return true;
+	}
+
 </script>
 
 

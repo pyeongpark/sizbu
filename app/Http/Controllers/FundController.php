@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\Log;
-use App\Purchase;
+use App\Fund;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 
-class PurchaseController extends Controller
+class FundController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +18,11 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        //$all_purchase = DB::select('select * from purchases order by created_at DESC');
-
         $numInPage = Config::get('app.pagination');
 
-        $all_purchase = DB::table('purchases')->orderBy('id', 'DESC')->paginate($numInPage);
+        $all_fund = DB::table('funds')->orderBy('id', 'DESC')->paginate($numInPage);
 
-        return view('subviews/purchase')->with('purchases', $all_purchase);
+        return view('subviews/fund')->with('funds', $all_fund);
     }
 
     /**
@@ -52,6 +50,7 @@ class PurchaseController extends Controller
             'phonecode' => 'bail|required|max:5|regex:/^[0-9]+$/',
             'phonenumber' => 'bail|required|max:20',
             'email' => 'bail|required|email|max:50',
+            'amount' => 'bail|required|max:10|regex:/^[0-9]+$/',
             'product' => 'required|nullable',
             'description' => 'required|min:100',
         ]);
@@ -59,22 +58,22 @@ class PurchaseController extends Controller
         $today = date('Y-m-d H:i:s');
 
         //Model class
-        $purchase = new Purchase(); 
+        $fund = new Fund(); 
 
-        $purchase->loginname = Auth::user()->name;
-        $purchase->firstname = $request['firstname'];
-        $purchase->lastname = $request['lastname'];
-        $purchase->country = $request['country'];
-        $purchase->phonecode = $request['phonecode'];
-        $purchase->phonenumber = $request['phonenumber'];
-        $purchase->email = $request['email'];
-        $purchase->contactme = $request['contactme'];
-        $purchase->buysell = $request['buysell'];
-        $purchase->product = $request['product'];
-        $purchase->description = $request['description'];
-        $purchase->created_at = $today;
+        $fund->loginname = Auth::user()->name;
+        $fund->firstname = $request['firstname'];
+        $fund->lastname = $request['lastname'];
+        $fund->country = $request['country'];
+        $fund->phonecode = $request['phonecode'];
+        $fund->phonenumber = $request['phonenumber'];
+        $fund->email = $request['email'];
+        $fund->contactme = $request['contactme'];
+        $fund->amount = $request['amount'];
+        $fund->product = $request['product'];
+        $fund->description = $request['description'];
+        $fund->created_at = $today;
         
-        $purchase->save();
+        $fund->save();
 
         /* passed current url back2url in the form */
         $b2u = $request->input('back2url'); 
@@ -84,15 +83,14 @@ class PurchaseController extends Controller
         return redirect($b2u);
     }
 
-    /* PP : added for sorting the records */
+     /* PP : added for sorting the records */
     public function sort($sortby)
     {
         $numInPage = Config::get('app.pagination');
 
-        //$sorted_purchase = DB::select('select * from purchases order by '.$sortby.' ASC');
-        $sorted_purchase = Purchase::orderBy($sortby)->paginate($numInPage);
+        $sorted_fund = Fund::orderBy($sortby)->paginate($numInPage);
 
-        return redirect('/purchase')->with('sortedpurchases', $sorted_purchase);
+        return redirect('/fund')->with('sortedfunds', $sorted_fund);
     }
 
     /**
@@ -112,14 +110,13 @@ class PurchaseController extends Controller
 
         $numInPage = Config::get('app.pagination');
 
-        $searched = Purchase::where('lastname','LIKE','%'.$q.'%')->orWhere('firstname','LIKE','%'.$q.'%')->orWhere('description','LIKE','%'.$q.'%');
-        $spurchases = $searched -> paginate($numInPage);
+        $searched = Fund::where('lastname','LIKE','%'.$q.'%')->orWhere('firstname','LIKE','%'.$q.'%')->orWhere('description','LIKE','%'.$q.'%');
+        $sfunds = $searched -> paginate($numInPage);
 
         // flash session
-        return redirect('/searchedpurchase')->with('spurchases', $spurchases);
+        return redirect('/searchedfund')->with('sfunds', $sfunds);
 
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -131,24 +128,23 @@ class PurchaseController extends Controller
     {
         session_start();
 
-        $edit_purchase = DB::select('select * from purchases where id = ' . $id);
+        $edit_fund = DB::select('select * from funds where id = ' . $id);
 
-        $_SESSION['editPurchase'] = $edit_purchase;
-        $_SESSION['editIdPurchase'] = $id;
+        $_SESSION['editFund'] = $edit_fund;
+        $_SESSION['editIdFund'] = $id;
 
-        return redirect('/editpurchase');
+        return redirect('/editfund');
     }
 
-    public function delete($id)
+     public function delete($id)
     {
-        $delete_purchase = DB::select('delete from purchases where id= '. $id);
+        $delete_fund = DB::select('delete from funds where id= '. $id);
 
-        return redirect('/purchase');
+        return redirect('/fund');
     }
 
     /**
      * Update the specified resource in storage.
-
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -164,12 +160,13 @@ class PurchaseController extends Controller
             'phonecode' => 'bail|required|max:5|regex:/^[0-9]+$/',
             'phonenumber' => 'bail|required|max:20',
             'email' => 'bail|required|email|max:50',
+            'amount' => 'bail|required|max:10|regex:/^[0-9]+$/',
             'product' => 'required|nullable',
             'description' => 'required|min:100',
         ]);
 
         $today = date('Y-m-d H:i:s');
-        
+
         $id = $request['id'];
 
         $fname = $request['firstname'];
@@ -179,12 +176,12 @@ class PurchaseController extends Controller
         $pn = $request['phonenumber'];
         $email = $request['email'];
         $cm = $request['contactme'];
-        $bs = $request['buysell'];
+        $amount = $request['amount'];
         $product = $request['product'];
         $des = $request['description'];
         $up_at = $today;
 
-        DB::select("update purchases set firstname = '$fname', lastname = '$lname', country='$country', phonecode = '$pc', phonenumber = '$pn', email = '$email', contactme = $cm, buysell = '$bs', product = '$product', description = '$des', updated_at = '$up_at' where id=".$id);
+        DB::select("update funds set firstname = '$fname', lastname = '$lname', country='$country', phonecode = '$pc', phonenumber = '$pn', email = '$email', contactme = $cm, amount = $amount, product = '$product', description = '$des', updated_at = '$up_at' where id=".$id);
 
         /* passed current url back2url in the form */
         $b2u = $request->input('back2url'); 

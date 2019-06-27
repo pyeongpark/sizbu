@@ -1,7 +1,7 @@
 
     <nav class="ppnav-top">
         <div id="top-left">
-            <a href="/" ><img class="logo-img" src="{{$path}}img/logo.png"></a>
+            <a href="/" ><img class="logo-img pt-1 pl-1" src="{{$path}}img/logo.png"></a>
 
             @desktop 
                 <button type="button" class="btn btn-info btn-sm" 
@@ -9,16 +9,11 @@
                 <div>
                     <span class="font-bold md-vtext">
                         <a class="nav-lang" href="lang/en">Eng</a>|
-                        <a class="nav-lang" href="lang/ka">Kaz</a>|
-                        <a class="nav-lang" href="lang/ru">Rus</a>|
-                        <a class="nav-lang" href="lang/uz">Uzb</a>   
+                        <a class="nav-lang" href="lang/ru">Rus</a>
                     </span>
                 </div>
             @elsedesktop
-                <!--button type="button" class="btn btn-info btn-lg" 
-                    data-toggle="modal" data-target="#infoModal">Info</button-->
                 <span class="md-vtext font-bold pp-center">@lang('general.company-short')</span>
-                <div><span class="font-red md-vtext">&nbsp;@lang('general.continent')</span></div>
             @enddesktop
 
         </div>
@@ -43,7 +38,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">
-                            <span class="font-bold">CLOSE</span>
+                            <span class="font-bold">@lang('general.close')</span>
                         </button>
                     </div>
                 </div>
@@ -54,14 +49,14 @@
             @desktop 
                 <div class="rcorner pp-center">
         	        <span class="font-red md-vtext">@lang('general.continent')</span><br>
-        	        <span class="font-bold lg-vtext">@lang('general.top-msg')</span>
+        	        <span class="font-bold lg-vtext">@lang('general.ca-lands')</span>
                 </div>
             @elsedesktop
                 <div class="rcorner pp-center">
+                    <span class="font-red md-vtext">@lang('general.continent')</span><br>
                     <span class="lg-vtext">
                         <a class="nav-lang" href="lang/en">Eng</a>&nbsp;|&nbsp;
-                        <a class="nav-lang" href="lang/ru">Rus</a>&nbsp;|&nbsp;
-                        <a class="nav-lang" href="lang/uz">Uzb</a>   
+                        <a class="nav-lang" href="lang/ru">Rus</a> 
                     </span>
                 </div>
             @enddesktop
@@ -70,12 +65,12 @@
         <div id="top-right">
             <ul class="d-flex flex-row-reverse  pp-no-dot pt-1">
                 @guest
-                    <li><a class="nav-links sm-vtext" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                    <li><a class="nav-links sm-vtext" href="{{ route('register') }}">@lang('general.register')</a></li>
                     @desktop
-                        <li><a class="nav-links sm-vtext" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <li><a class="nav-links sm-vtext" href="{{ route('login') }}">@lang('auth.lg')</a>
                         </li>
                     @elsedesktop
-                        <li><a class="nav-links sm-vtext" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                        <li><a class="nav-links sm-vtext" href="{{ route('login') }}">@lang('auth.lg')</a></li>
                     @enddesktop
                     
                 @else
@@ -85,7 +80,7 @@
                         </span>
                         <a class="nav-links sm-vtext" href="{{ route('logout') }}" 
                             onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">{{ __('Logout') }}
+                            document.getElementById('logout-form').submit();">@lang('auth.lo')
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" 
                             method="POST" style="display: none;">
